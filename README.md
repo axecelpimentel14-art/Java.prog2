@@ -1,4 +1,5 @@
-# Java.prog2
+#java.prog2
+
 import java.util.Scanner;
 
 public class LostAndFoundSystem {
@@ -8,12 +9,17 @@ public class LostAndFoundSystem {
     static String[] lostItems = new String[10];
     static String[] foundItems = new String[10];
 
+    static String[] lostLocations = new String[10];
+    static String[] foundLocations = new String[10];
+
     static int lostCount = 0;
     static int foundCount = 0;
 
     public static void main(String[] args) {
 
-        System.out.println("Campus Lost and Found Management System");
+        System.out.println("=====================================");
+        System.out.println(" CAMPUS LOST AND FOUND MANAGEMENT ");
+        System.out.println("=====================================");
 
         System.out.print("Do you want to login? (yes/no): ");
         String login = sc.nextLine();
@@ -26,21 +32,25 @@ public class LostAndFoundSystem {
             System.out.print("Enter Password: ");
             String pass = sc.nextLine();
 
-            if(user.equals("admin") && pass.equals("1234")){
+            // UPDATED LOGIN: Accept any non-empty input
+            if(!user.isEmpty() && !pass.isEmpty()){
+
+                System.out.println("Login successful! Welcome, " + user);
 
                 int option;
 
                 do{
-                    System.out.println("\n===== MAIN MENU =====");
+                    System.out.println("\n========= MAIN MENU =========");
                     System.out.println("1. Report Lost Item");
                     System.out.println("2. Report Found Item");
                     System.out.println("3. Search Item");
                     System.out.println("4. Display Lost Items");
                     System.out.println("5. Display Found Items");
                     System.out.println("6. Logout");
+                    System.out.println("=============================");
 
                     System.out.print("Choose option: ");
-                    
+
                     while(!sc.hasNextInt()){
                         System.out.print("Invalid input. Enter number: ");
                         sc.next();
@@ -76,22 +86,23 @@ public class LostAndFoundSystem {
                             break;
 
                         default:
-                            System.out.println("Invalid option.");
+                            System.out.println("Invalid option. Try again.");
                     }
 
-                }while(option != 6);
+                } while(option != 6);
 
-            }else{
-                System.out.println("Invalid username or password.");
+            } else {
+                System.out.println("Username and password cannot be empty.");
             }
 
-        }else{
+        } else {
             System.out.println("Exiting program...");
         }
 
         System.out.println("Program Ended.");
     }
 
+    // OPTION 1
     public static void reportLostItem(){
 
         if(lostCount >= lostItems.length){
@@ -102,11 +113,18 @@ public class LostAndFoundSystem {
         System.out.print("Enter lost item name: ");
         String item = sc.nextLine();
 
-        lostItems[lostCount++] = item;
+        System.out.print("Enter location lost: ");
+        String location = sc.nextLine();
 
-        System.out.println("Lost item reported successfully.");
+        lostItems[lostCount] = item;
+        lostLocations[lostCount] = location;
+        lostCount++;
+
+        System.out.println("Submitting lost report...");
+        System.out.println("Your report has been submitted successfully.");
     }
 
+    // OPTION 2
     public static void reportFoundItem(){
 
         if(foundCount >= foundItems.length){
@@ -117,11 +135,18 @@ public class LostAndFoundSystem {
         System.out.print("Enter found item name: ");
         String item = sc.nextLine();
 
-        foundItems[foundCount++] = item;
+        System.out.print("Enter location found: ");
+        String location = sc.nextLine();
 
-        System.out.println("Found item reported successfully.");
+        foundItems[foundCount] = item;
+        foundLocations[foundCount] = location;
+        foundCount++;
+
+        System.out.println("Submitting found report...");
+        System.out.println("Your report has been submitted successfully.");
     }
 
+    // OPTION 3
     public static void searchItem(){
 
         System.out.print("Enter item to search: ");
@@ -131,46 +156,10 @@ public class LostAndFoundSystem {
 
         for(int i = 0; i < lostCount; i++){
             if(lostItems[i].toLowerCase().contains(search.toLowerCase())){
-                System.out.println("Found in LOST: " + lostItems[i]);
+                System.out.println("Item found in LOST list: " + lostItems[i] + " | Location: " + lostLocations[i]);
                 found = true;
             }
         }
 
         for(int i = 0; i < foundCount; i++){
-            if(foundItems[i].toLowerCase().contains(search.toLowerCase())){
-                System.out.println("Found in FOUND: " + foundItems[i]);
-                found = true;
-            }
-        }
-
-        if(!found){
-            System.out.println("Item not found.");
-        }
-    }
-
-    public static void displayLostItems(){
-
-        if(lostCount == 0){
-            System.out.println("No lost items reported.");
-            return;
-        }
-
-        System.out.println("\nLost Items List:");
-        for(int i = 0; i < lostCount; i++){
-            System.out.println((i + 1) + ". " + lostItems[i]);
-        }
-    }
-
-    public static void displayFoundItems(){
-
-        if(foundCount == 0){
-            System.out.println("No found items reported.");
-            return;
-        }
-
-        System.out.println("\nFound Items List:");
-        for(int i = 0; i < foundCount; i++){
-            System.out.println((i + 1) + ". " + foundItems[i]);
-        }
-    }
-}
+            if(foundItems[i].toLowerCase().cont
