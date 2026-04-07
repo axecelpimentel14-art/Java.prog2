@@ -1,5 +1,5 @@
-#java.prog2
 
+java.prog2
 import java.util.Scanner;
 
 public class LostAndFoundSystem {
@@ -32,7 +32,6 @@ public class LostAndFoundSystem {
             System.out.print("Enter Password: ");
             String pass = sc.nextLine();
 
-            // UPDATED LOGIN: Accept any non-empty input
             if(!user.isEmpty() && !pass.isEmpty()){
 
                 System.out.println("Login successful! Welcome, " + user);
@@ -102,7 +101,6 @@ public class LostAndFoundSystem {
         System.out.println("Program Ended.");
     }
 
-    // OPTION 1
     public static void reportLostItem(){
 
         if(lostCount >= lostItems.length){
@@ -124,7 +122,6 @@ public class LostAndFoundSystem {
         System.out.println("Your report has been submitted successfully.");
     }
 
-    // OPTION 2
     public static void reportFoundItem(){
 
         if(foundCount >= foundItems.length){
@@ -146,7 +143,6 @@ public class LostAndFoundSystem {
         System.out.println("Your report has been submitted successfully.");
     }
 
-    // OPTION 3
     public static void searchItem(){
 
         System.out.print("Enter item to search: ");
@@ -162,4 +158,5 @@ public class LostAndFoundSystem {
         }
 
         for(int i = 0; i < foundCount; i++){
-            if(foundItems[i].toLowerCase().cont
+            if(foundItems[i].toLowerCase().contains(search.toLowerCase())){
+                System.out.println("Item found in FOUND list: " + foundItems
